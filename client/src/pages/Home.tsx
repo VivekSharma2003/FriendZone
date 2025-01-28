@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Search, UserPlus, UserMinus, Users, Bell, LogOut, Loader } from 'lucide-react';
+import {
+  Search,
+  UserPlus,
+  UserMinus,
+  Users,
+  Bell,
+  LogOut,
+  Loader,
+  Sun,
+  Moon,
+} from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,6 +20,7 @@ import { useSpring, animated } from '@react-spring/web';
 interface User {
   _id: string;
   username: string;
+  profilePicture?: string; // Optional: URL to profile picture
 }
 
 interface FriendRequest {
@@ -39,6 +50,7 @@ function Home() {
     recommendations: false,
   });
 
+  // Floating animation for icons
   const floatAnimation = useSpring({
     from: { transform: 'translateY(0px)' },
     to: async (next) => {
@@ -117,9 +129,12 @@ function Home() {
 
     try {
       setLoading((prev) => ({ ...prev, search: true }));
-      const response = await axios.get(`${API_BASE_URL}/users/search?q=${encodeURIComponent(searchQuery)}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${API_BASE_URL}/users/search?q=${encodeURIComponent(searchQuery)}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setUsers(response.data);
     } catch (error) {
       toast.error('Failed to search users');
@@ -145,7 +160,10 @@ function Home() {
     }
   };
 
-  const handleFriendRequest = async (userId: string, status: 'accepted' | 'rejected') => {
+  const handleFriendRequest = async (
+    userId: string,
+    status: 'accepted' | 'rejected'
+  ) => {
     try {
       await axios.put(
         `${API_BASE_URL}/friends/request/${userId}`,
@@ -179,32 +197,53 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 p-4">
+    <div className="min-h-screen bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 transition-colors duration-500">
       {/* Navigation Bar */}
       <motion.nav
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 100, duration: 0.5 }}
-        className="bg-white dark:bg-gray-800 bg-opacity-30 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg"
+        className="bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-md shadow-lg"
       >
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <motion.h1
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-2xl font-extrabold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent"
+            className="text-2xl font-extrabold text-gray-800 flex items-center gap-2"
           >
-            Social Network - {username}
+            <Users className="text-teal-500" size={24} />
+            {username}
           </motion.h1>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleLogout}
-            className="flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg shadow-md transition"
-          >
-            <LogOut size={20} />
-            Logout
-          </motion.button>
+          <div className="flex items-center gap-4">
+            {/* Notifications */}
+            <div className="relative">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-sm transition"
+                aria-label="Notifications"
+              >
+                <Bell size={20} />
+              </motion.button>
+              {friendRequests.length > 0 && (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                  {friendRequests.length}
+                </span>
+              )}
+            </div>
+            {/* Logout Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleLogout}
+              className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-sm transition"
+              aria-label="Logout"
+            >
+              <LogOut size={20} />
+              Logout
+            </motion.button>
+          </div>
         </div>
       </motion.nav>
 
@@ -224,7 +263,7 @@ function Home() {
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               placeholder="Search users..."
-              className="flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
+              className="flex-1 bg-white text-gray-800 rounded-md px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
               aria-label="Search users"
             />
             <motion.button
@@ -232,10 +271,14 @@ function Home() {
               whileTap={{ scale: 0.95 }}
               onClick={handleSearch}
               disabled={loading.search}
-              className="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-md shadow-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Search"
             >
-              {loading.search ? <Loader size={20} className="animate-spin" /> : <Search size={20} />}
+              {loading.search ? (
+                <Loader size={20} className="animate-spin" />
+              ) : (
+                <Search size={20} />
+              )}
             </motion.button>
           </div>
 
@@ -247,17 +290,27 @@ function Home() {
                 exit={{ height: 0, opacity: 0 }}
                 className="mt-4"
               >
-                <div className="bg-white dark:bg-gray-800 bg-opacity-30 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg p-4">
-                  <h3 className="text-lg font-semibold text-teal-500 mb-4">Search Results</h3>
+                <div className="bg-white rounded-md shadow-md p-4">
+                  <h3 className="text-lg font-semibold text-teal-500 mb-4">
+                    Search Results
+                  </h3>
                   {users.map((user) => (
                     <motion.div
                       key={user._id}
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: 20, opacity: 0 }}
-                      className="flex items-center justify-between p-3 bg-white dark:bg-gray-700 rounded-lg shadow-sm hover:bg-teal-100 dark:hover:bg-teal-800 transition-colors"
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-md shadow-sm mb-2 hover:bg-teal-100 transition-colors"
                     >
-                      <span className="font-medium text-gray-800 dark:text-gray-100">{user.username}</span>
+                      <div className="flex items-center gap-4">
+                        {/* Profile Picture */}
+                        <img
+                          src={user.profilePicture || 'https://via.placeholder.com/40'}
+                          alt={`${user.username}'s profile`}
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+                        <span className="font-medium text-gray-800">{user.username}</span>
+                      </div>
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
@@ -284,7 +337,7 @@ function Home() {
               exit={{ y: -20, opacity: 0 }}
               className="mb-8"
             >
-              <div className="bg-white dark:bg-gray-800 bg-opacity-30 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg p-6">
+              <div className="bg-white rounded-md shadow-md p-6">
                 <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-teal-500">
                   <animated.div style={floatAnimation}>
                     <Bell className="text-teal-500" size={24} />
@@ -298,15 +351,27 @@ function Home() {
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: 20, opacity: 0 }}
-                      className="flex items-center justify-between p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm"
+                      className="flex items-center justify-between p-4 bg-gray-50 rounded-md shadow-sm"
                     >
-                      <span className="font-medium text-gray-800 dark:text-gray-100">{request.from.username}</span>
+                      <div className="flex items-center gap-4">
+                        {/* Profile Picture */}
+                        <img
+                          src={request.from.profilePicture || 'https://via.placeholder.com/40'}
+                          alt={`${request.from.username}'s profile`}
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+                        <span className="font-medium text-gray-800">
+                          {request.from.username}
+                        </span>
+                      </div>
                       <div className="flex gap-2">
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => handleFriendRequest(request.from._id, 'accepted')}
-                          className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg shadow-md transition"
+                          onClick={() =>
+                            handleFriendRequest(request.from._id, 'accepted')
+                          }
+                          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-sm transition"
                           aria-label={`Accept friend request from ${request.from.username}`}
                         >
                           Accept
@@ -314,8 +379,10 @@ function Home() {
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => handleFriendRequest(request.from._id, 'rejected')}
-                          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-md transition"
+                          onClick={() =>
+                            handleFriendRequest(request.from._id, 'rejected')
+                          }
+                          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-sm transition"
                           aria-label={`Reject friend request from ${request.from.username}`}
                         >
                           Reject
@@ -332,11 +399,8 @@ function Home() {
         {/* Friends and Recommendations Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Friends List */}
-          <motion.div
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
-            <div className="bg-white dark:bg-gray-800 bg-opacity-30 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg p-6">
+          <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}>
+            <div className="bg-white rounded-md shadow-md p-6">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-teal-500">
                 <Users className="text-teal-500" size={24} />
                 Friends
@@ -347,7 +411,7 @@ function Home() {
                     <Loader size={30} className="animate-spin text-teal-500" />
                   </div>
                 ) : friends.length === 0 ? (
-                  <p className="text-gray-600 dark:text-gray-300 text-center py-8">No friends yet</p>
+                  <p className="text-gray-600 text-center py-8">No friends yet</p>
                 ) : (
                   friends.map((friend) => (
                     <motion.div
@@ -355,9 +419,19 @@ function Home() {
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: 20, opacity: 0 }}
-                      className="flex items-center justify-between p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm hover:bg-teal-100 dark:hover:bg-teal-800 transition-colors"
+                      className="flex items-center justify-between p-4 bg-gray-50 rounded-md shadow-sm hover:bg-teal-100 transition-colors"
                     >
-                      <span className="font-medium text-gray-800 dark:text-gray-100">{friend.username}</span>
+                      <div className="flex items-center gap-4">
+                        {/* Profile Picture */}
+                        <img
+                          src={friend.profilePicture || 'https://via.placeholder.com/40'}
+                          alt={`${friend.username}'s profile`}
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+                        <span className="font-medium text-gray-800">
+                          {friend.username}
+                        </span>
+                      </div>
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
@@ -375,19 +449,20 @@ function Home() {
           </motion.div>
 
           {/* Friend Recommendations */}
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
-            <div className="bg-white dark:bg-gray-800 bg-opacity-30 dark:bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-bold mb-4 text-teal-500">Recommended Friends</h2>
+          <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}>
+            <div className="bg-white rounded-md shadow-md p-6">
+              <h2 className="text-2xl font-bold mb-4 text-teal-500">
+                Recommended Friends
+              </h2>
               <div className="space-y-4">
                 {loading.recommendations ? (
                   <div className="flex justify-center">
                     <Loader size={30} className="animate-spin text-teal-500" />
                   </div>
                 ) : recommendations.length === 0 ? (
-                  <p className="text-gray-600 dark:text-gray-300 text-center py-8">No recommendations available</p>
+                  <p className="text-gray-600 text-center py-8">
+                    No recommendations available
+                  </p>
                 ) : (
                   recommendations.map(({ user, mutualFriends }) => (
                     <motion.div
@@ -395,11 +470,23 @@ function Home() {
                       initial={{ x: 20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: -20, opacity: 0 }}
-                      className="flex items-center justify-between p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm hover:bg-teal-100 dark:hover:bg-teal-800 transition-colors"
+                      className="flex items-center justify-between p-4 bg-gray-50 rounded-md shadow-sm hover:bg-teal-100 transition-colors"
                     >
-                      <div>
-                        <span className="font-medium text-gray-800 dark:text-gray-100">{user.username}</span>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{mutualFriends} mutual friends</p>
+                      <div className="flex items-center gap-4">
+                        {/* Profile Picture */}
+                        <img
+                          src={user.profilePicture || 'https://via.placeholder.com/40'}
+                          alt={`${user.username}'s profile`}
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <span className="font-medium text-gray-800">
+                            {user.username}
+                          </span>
+                          <p className="text-sm text-gray-600">
+                            {mutualFriends} mutual friends
+                          </p>
+                        </div>
                       </div>
                       <motion.button
                         whileHover={{ scale: 1.1 }}
