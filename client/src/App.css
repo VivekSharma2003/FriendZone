@@ -1,0 +1,10 @@
+input {
+    outline: none;
+    border: none;
+    color: aliceblue;
+}
+
+input:focus,
+input:active {
+    outline: none;
+}

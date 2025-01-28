@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-teal-900 via-emerald-800 to-cyan-900;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-lg rounded-2xl 
+           shadow-[0_8px_32px_0_rgba(0,40,40,0.37)]
+           border border-white/20
+           transition-all duration-300;
+  }
+  
+  .glass-button {
+    @apply bg-gradient-to-br from-teal-500/30 to-emerald-500/30
+           hover:from-teal-500/40 hover:to-emerald-500/40
+           backdrop-blur-md text-mint font-medium
+           rounded-xl shadow-lg border border-white/20
+           transition-all duration-300 ease-out
+           hover:shadow-[0_5px_15px_rgba(127,255,212,0.3)]
+           hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .glass-input {
+    @apply bg-white/10 backdrop-blur-md
+           border-2 border-white/20
+           rounded-xl shadow-[inset_0_2px_4px_rgba(0,40,40,0.3)]
+           focus:ring-2 focus:ring-aqua/30 focus:border-transparent
+           transition-all duration-300
+           text-white placeholder-white/50;
+  }
+}
+
+.text-mint {
+  color: #98FF98;
+}
+
+.text-aqua {
+  color: #7FFFD4;
+}
+
+.text-charcoal {
+  color: #36454F;
+}
+
+.shadow-3d {
+  box-shadow: 
+    0 10px 20px rgba(0,40,40,0.3),
+    0 6px 6px rgba(0,40,40,0.2),
+    0 -2px 6px rgba(127,255,212,0.1);
+}
