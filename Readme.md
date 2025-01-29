@@ -15,35 +15,35 @@
 ---
     
 ## 📂 **File Structure**  
-    
+
 ### 🎨 **Frontend**  
-    
-```bash
+
+bash
 client/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── PrivateRoute.tsx
-│   │   └── ...
-│   ├── contexts/
-│   │   ├── AuthContext.tsx
-│   │   └── ...
-│   ├── pages/
-│   │   ├── Home.tsx
-│   │   ├── Login.tsx
-│   │   ├── Register.tsx
-│   │   └── ...
-│   ├── App.css
-│   ├── App.tsx
-│   ├── index.css
-│   └── main.tsx
-├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-├── tsconfig.app.json
-├── tsconfig.json
-└── vite.config.ts
+public/
+  index.html
+src/
+  components/
+    PrivateRoute.tsx
+    ...
+  contexts/
+    AuthContext.tsx
+    ...
+  pages/
+    Home.tsx
+    Login.tsx
+    Register.tsx
+    ...
+  App.css
+  App.tsx
+  index.css
+  main.tsx
+package.json
+postcss.config.js
+tailwind.config.js
+tsconfig.app.json
+tsconfig.json
+vite.config.ts
 
 
 ### 🛠️ **Backend**  
