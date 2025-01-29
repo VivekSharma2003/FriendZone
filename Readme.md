@@ -45,3 +45,36 @@ client/
 ├── tsconfig.json
 └── vite.config.ts
 
+## 🖼️ **Screenshots**  
+    
+    
+### 🔐 **Login Page**  
+![Login Page](./client/src/img/login.png)  
+        
+### ✍️ **Register Page**  
+![Register Page](./client/src/img/register.png)  
+        
+### 🏠 **Home Page**  
+![Home Page](./client/src/img/home.png)  
+        
+---
+        
+## ✨ **Features**  
+        
+- 🔒 **User Authentication and Authorization**  
+- 🤝 **Friend Request System**  
+- 🧑‍🤝‍🧑 **Friendship Management**  
+- 🔍 **User Search and Filtering**  
+- 📱 **Responsive Design**  
+- 📢 **Real-time Notifications**    
+- 🌐 **Cross-Platform Compatibility**  
+        
+---
+        
+## ⚙️ **Installation**  
+        
+### 🎨 **Frontend**  
+        
+1. **Clone the repository:**  
+   ```bash
+   git clone https://github.com/VivekSharma2003/FriendZone.git
