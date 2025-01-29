@@ -14,7 +14,7 @@ function Register() {
   const { login } = useAuth();
 
   // Define the API base URL
-  const API_BASE_URL = 'https://friend-zone-backend-vs.vercel.app/api';
+  const API_BASE_URL = 'https://friend-zone-vs.vercel.app/api';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
