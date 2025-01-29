@@ -8,8 +8,6 @@ import {
   Bell,
   LogOut,
   Loader,
-  Sun,
-  Moon,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +18,6 @@ import { useSpring, animated } from '@react-spring/web';
 interface User {
   _id: string;
   username: string;
-  profilePicture?: string; // Optional: URL to profile picture
 }
 
 interface FriendRequest {
@@ -303,12 +300,7 @@ function Home() {
                       className="flex items-center justify-between p-3 bg-gray-50 rounded-md shadow-sm mb-2 hover:bg-teal-100 transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        {/* Profile Picture */}
-                        <img
-                          src={user.profilePicture || 'https://via.placeholder.com/40'}
-                          alt={`${user.username}'s profile`}
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
+                        {/* Removed Profile Picture */}
                         <span className="font-medium text-gray-800">{user.username}</span>
                       </div>
                       <motion.button
@@ -354,12 +346,7 @@ function Home() {
                       className="flex items-center justify-between p-4 bg-gray-50 rounded-md shadow-sm"
                     >
                       <div className="flex items-center gap-4">
-                        {/* Profile Picture */}
-                        <img
-                          src={request.from.profilePicture || 'https://via.placeholder.com/40'}
-                          alt={`${request.from.username}'s profile`}
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
+                        {/* Removed Profile Picture */}
                         <span className="font-medium text-gray-800">
                           {request.from.username}
                         </span>
@@ -422,12 +409,7 @@ function Home() {
                       className="flex items-center justify-between p-4 bg-gray-50 rounded-md shadow-sm hover:bg-teal-100 transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        {/* Profile Picture */}
-                        <img
-                          src={friend.profilePicture || 'https://via.placeholder.com/40'}
-                          alt={`${friend.username}'s profile`}
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
+                        {/* Removed Profile Picture */}
                         <span className="font-medium text-gray-800">
                           {friend.username}
                         </span>
@@ -473,12 +455,7 @@ function Home() {
                       className="flex items-center justify-between p-4 bg-gray-50 rounded-md shadow-sm hover:bg-teal-100 transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        {/* Profile Picture */}
-                        <img
-                          src={user.profilePicture || 'https://via.placeholder.com/40'}
-                          alt={`${user.username}'s profile`}
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
+                        {/* Removed Profile Picture */}
                         <div>
                           <span className="font-medium text-gray-800">
                             {user.username}
