@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin:'*',
+  origin:'https://friend-zone-vs.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 app.use(express.json());
