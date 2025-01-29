@@ -72,13 +72,13 @@ vercel.json
 
 
 ### 🔐 **Login Page**  
-![Login Page](./client/src/img/login.png)  
+![Login Page](./client/src/img/Login.png)  
 
 ### ✍️ **Register Page**  
-![Register Page](./client/src/img/register.png)  
+![Register Page](./client/src/img/Register.png)  
 
 ### 🏠 **Home Page**  
-![Home Page](./client/src/img/home.png)  
+![Home Page](./client/src/img/Home.png)  
 
 ---
         
