@@ -45,18 +45,41 @@ client/
 ├── tsconfig.json
 └── vite.config.ts
 
+
+### 🛠️ **Backend**  
+
+bash
+server/
+  models/
+    User.js
+    ...
+  routes/
+    auth.js
+    friends.js
+    users.js
+    ...
+  middleware/
+    auth.js
+    ...
+  index.js
+package.json
+vercel.json
+
+
+---
+
 ## 🖼️ **Screenshots**  
-    
-    
+
+
 ### 🔐 **Login Page**  
 ![Login Page](./client/src/img/login.png)  
-        
+
 ### ✍️ **Register Page**  
 ![Register Page](./client/src/img/register.png)  
-        
+
 ### 🏠 **Home Page**  
 ![Home Page](./client/src/img/home.png)  
-        
+
 ---
         
 ## ✨ **Features**  
