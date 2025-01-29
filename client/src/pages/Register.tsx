@@ -14,7 +14,7 @@ function Register() {
   const { login } = useAuth();
 
   // Define the API base URL
-  const API_BASE_URL = 'https://friend-zone-backend-vs.vercel.app/api';
+  const API_BASE_URL = 'https://friend-zone-backend-vs.vercel.app/';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ function Register() {
       navigate('/');
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Registration failed');
-      setLoading(false); // Ensure loading is set to false on error
+      setLoading(false);
     }
   };
 

@@ -77,7 +77,7 @@ function Home() {
     navigate('/login');
   };
 
-  const API_BASE_URL = 'https://friend-zone-backend-vs.vercel.app/api';
+  const API_BASE_URL = 'https://friend-zone-backend-vs.vercel.app/';
 
   const fetchFriendRequests = async () => {
     try {
