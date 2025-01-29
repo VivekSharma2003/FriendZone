@@ -18,7 +18,7 @@
 
 ### 🎨 **Frontend**  
 
-bash
+```bash
 client/
 public/
   index.html
@@ -48,7 +48,7 @@ vite.config.ts
 
 ### 🛠️ **Backend**  
 
-bash
+```bash
 server/
   models/
     User.js
@@ -104,17 +104,17 @@ vercel.json
 
 2. Navigate to the client directory:  
    
-bash
+  ```bash
    cd client
   
 3. Install dependencies:  
    
-bash
+  ```bash
    npm install
   
 4. Start the development server:  
    
-bash
+  ```bash
    npm run dev
   
 
@@ -122,22 +122,22 @@ bash
 
 1. Clone the repository:  
    
-bash
+  ```bash
    git clone https://github.com/VivekSharma2003/FriendZone.git
   
 2. Navigate to the server directory:  
    
-bash
+  ```bash
    cd server
   
 3. Install dependencies:  
    
-bash
+  ```bash
    npm install
   
 4. Start the development server:  
    
-bash
+  ```bash
    npm run dev
   
 
