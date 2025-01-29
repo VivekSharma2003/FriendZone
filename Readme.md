@@ -18,52 +18,51 @@
 
 ### 🎨 **Frontend**  
 
-```bash
-client/
-public/
-  index.html
-src/
-  components/
-    PrivateRoute.tsx
-    ...
-  contexts/
-    AuthContext.tsx
-    ...
-  pages/
-    Home.tsx
-    Login.tsx
-    Register.tsx
-    ...
-  App.css
-  App.tsx
-  index.css
-  main.tsx
-package.json
-postcss.config.js
-tailwind.config.js
-tsconfig.app.json
-tsconfig.json
-vite.config.ts
-
+    client/
+    public/
+        index.html
+    src/
+        components/
+            PrivateRoute.tsx
+            ...
+        contexts/
+            AuthContext.tsx
+            ...
+        pages/
+            Home.tsx
+            Login.tsx
+            Register.tsx
+            ...
+        App.css
+        App.tsx
+        index.css
+        main.tsx
+    package.json
+    postcss.config.js
+    tailwind.config.js
+    tsconfig.app.json
+    tsconfig.json
+    vite.config.ts
+  
+---
 
 ### 🛠️ **Backend**  
 
-```bash
-server/
-  models/
-    User.js
-    ...
-  routes/
-    auth.js
-    friends.js
-    users.js
-    ...
-  middleware/
-    auth.js
-    ...
-  index.js
-package.json
-vercel.json
+    server/
+     models/
+        User.js
+        ...
+     routes/
+        auth.js
+        friends.js
+        users.js
+        ...
+     middleware/
+        auth.js
+        ...
+     index.js
+    package.json
+    vercel.json
 
 
 ---
@@ -104,17 +103,17 @@ vercel.json
 
 2. Navigate to the client directory:  
    
-  ```bash
+    ```bash
    cd client
   
 3. Install dependencies:  
    
-  ```bash
+    ```bash
    npm install
   
 4. Start the development server:  
    
-  ```bash
+    ```bash
    npm run dev
   
 
@@ -122,25 +121,24 @@ vercel.json
 
 1. Clone the repository:  
    
-  ```bash
+     ```bash
    git clone https://github.com/VivekSharma2003/FriendZone.git
   
 2. Navigate to the server directory:  
    
-  ```bash
+    ```bash
    cd server
   
 3. Install dependencies:  
    
-  ```bash
+    ```bash
    npm install
   
 4. Start the development server:  
    
-  ```bash
+    ```bash
    npm run dev
   
-
 ---
 
 ## 📡 **API Documentation**  
