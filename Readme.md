@@ -1,7 +1,7 @@
 # 🌐 **Friendzone**  
-![GitHub issues](https://img.shields.io/github/issues/your-username/friendzone)
-![GitHub stars](https://img.shields.io/github/stars/your-username/friendzone?style=social)
-![License](https://img.shields.io/github/license/your-username/friendzone)
+![GitHub issues](https://img.shields.io/github/issues/VivekSharma2003/FriendZone)
+![GitHub stars](https://img.shields.io/github/stars/VivekSharma2003/FriendZone?style=social)
+![License](https://img.shields.io/github/license/VivekSharma2003/FriendZone)
 ---
     
 ### 🫂 **A Modern Social Networking Platform**  
